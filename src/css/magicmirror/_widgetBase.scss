@@ -1,0 +1,97 @@
+.--mm-widget{
+	position: absolute;
+	outline: 0.2rem solid rgba(black,0);
+	/* background-color: rgba(white, 0.1); */
+	box-sizing: border-box;
+	transform: scale(1);
+	transition: transform 100ms ease, outline 200ms ease, box-shadow 500ms ease 100ms;
+	perspective: 50rem;
+	/* box-shadow: 0 0 5rem 1rem rgba(black, 0); */
+	> .--mm-widget-front,
+	> .--mm-widget-back {
+		position: absolute;
+		top: 0;
+		left: 0;
+		backface-visibility: hidden;
+		transition: transform 500ms ease;
+		height: 100%;
+		width:100%;
+		// padding: 0.5rem;
+		box-sizing: border-box;
+	}
+	> .--mm-widget-front {
+		z-index: 2;
+		transform: rotateY(0deg);
+		/* background: red; */
+	}
+	> .--mm-widget-back {
+		z-index: 3;
+		transform: rotateY(180deg);
+		background: #121212;
+	}
+	.--mm-widget-settingsButton{
+		display: block;
+		position: absolute;
+		$size : 4.5rem;
+		height: $size;
+		width: $size;
+		bottom: $size / 10;
+		right: $size / 10;
+		user-select: none;
+		border-radius: 50%;
+		overflow: hidden;
+		cursor: pointer;
+		transform: rotate(0deg);
+		transition: transform 200ms ease, opacity 200ms ease;
+
+		/* background-color: rgba(white,1); */
+		background-image: url("img/ui_settings.svg");
+		background-size: contain;
+		z-index: 10;
+		opacity: 0;
+		pointer-events: none;
+		transform: scale(0.1);
+	}
+	.--mm-widget-nameTag{
+		@include setBaseFont();
+		text-align: center;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		user-select: none;
+		transition: opacity 400ms ease, transform 300ms ease, background-color 400ms ease, left 500ms ease;
+		pointer-events: none;
+		user-select: none;
+		padding: 1rem 1.8rem;
+		text-transform: uppercase;
+		font-weight: 600;
+		max-width: 100%;
+		max-height: 100%;
+		box-sizing: border-box;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		background-color: rgba(black,0.5);
+		z-index: 10;
+		opacity: 0;
+		font-size: 2rem;
+		border-bottom-right-radius: 1rem;
+		width: auto;
+		transform: translateX(0);
+	}
+	&.--mm-widget-flipped{
+		> .--mm-widget-front {
+			transform: rotateY(-180deg);
+		}
+		> .--mm-widget-back {
+			transform: rotateY(0deg);
+		}
+		.--mm-widget-nameTag{
+			opacity: 1;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: rgba(black,0);
+		}
+	}
+	@import 'clockWidget';
+}

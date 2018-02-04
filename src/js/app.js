@@ -2,8 +2,8 @@ class WeatherWidget extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      apiKey:"cc1132668106844791e358bf4fcf758b",
-      placeQuery:"Obergrombach",
+      apiKey:"",
+      placeQuery:"Bruchsal",
       hasResponse:false
     }
 
@@ -75,5 +75,68 @@ class WeatherWidget extends React.Component {
 }
 
 
+
+class MagicMirror extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      editMode:false,
+      widgets:{}
+    }
+
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+  }
+
+  initializeWigets(){
+
+  }
+
+  toggleEditMode(e){
+    this.setState({editMode:!this.state.editMode});
+  }
+
+  setEditMode(e){
+    this.setState({editMode:true});
+  }
+
+  unsetEditMode(e){
+    this.setState({editMode:false});
+  }
+
+
+
+  render(){
+    let mainContainerClasses = ['--mm-mainCanvas'];
+    if(this.state.editMode) mainContainerClasses.push('--mm-editMode');
+
+    return (
+      <section className={mainContainerClasses.join(' ')}>
+          <button onClick={this.toggleEditMode} className='--mm-editButton'></button>
+      </section>
+    )
+  }
+
+}
+
+class BaseWidget extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {}
+  }
+
+  render(){
+    return (
+      'hallo welt'
+    )
+  }
+
+}
+
+
+
+
+
+
+
 const app = document.getElementById('app');
-ReactDOM.render(<WeatherWidget />, app);
+ReactDOM.render(<MagicMirror></MagicMirror>, app);
