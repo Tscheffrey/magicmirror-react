@@ -1,1 +1,1 @@
-# react-exp02
+# magicmirror-react
