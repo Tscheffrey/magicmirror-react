@@ -10,7 +10,7 @@ class WeatherWidget extends React.Component {
     this.onApiKeyChanged = this.onApiKeyChanged.bind(this);
     this.onPlaceChanged = this.onPlaceChanged.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
-    this.refreshWeather()
+    this.refreshWeather();
   }
 
   onApiKeyChanged(e){
@@ -81,14 +81,38 @@ class MagicMirror extends React.Component {
     super(props);
     this.state = {
       editMode:false,
-      widgets:{}
+      widgets:{ }
     }
-
+    this.widgetIdCounter = 10;
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.initializeWigets();
+  }
+
+  componentDidMount(){
+
   }
 
   initializeWigets(){
+    this.addWidget({
+    type:BaseWidget,
+    props:{
+      text: 'First Widget'
+      }
+    });
 
+    this.addWidget({
+    type:BaseWidget,
+    props:{
+      text: 'Second Widget'
+      }
+    });
+  }
+
+  addWidget(widget){
+    let widgetList = this.state.widgets;
+    let id = this.generateWidgetId();
+    widgetList[id] = widget;
+    return id;
   }
 
   toggleEditMode(e){
@@ -103,6 +127,24 @@ class MagicMirror extends React.Component {
     this.setState({editMode:false});
   }
 
+  generateWidgetId(){
+    let id = this.widgetIdCounter;
+    this.widgetIdCounter++;
+    return id;
+  }
+
+  renderWidgets(){
+    let renderedWidgets = [];
+    for (var i in this.state.widgets) {
+      let widget = this.state.widgets[i];
+      let props = widget.props;
+      props.key = i;
+      var element = React.createElement(widget.type,props,null);
+      renderedWidgets.push(element);
+    }
+
+    return renderedWidgets;
+  }
 
 
   render(){
@@ -112,6 +154,7 @@ class MagicMirror extends React.Component {
     return (
       <section className={mainContainerClasses.join(' ')}>
           <button onClick={this.toggleEditMode} className='--mm-editButton'></button>
+          {this.renderWidgets()}
       </section>
     )
   }
@@ -121,12 +164,12 @@ class MagicMirror extends React.Component {
 class BaseWidget extends React.Component {
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render(){
     return (
-      'hallo welt'
+      <p>{this.props.text}</p>
     )
   }
 
@@ -139,4 +182,6 @@ class BaseWidget extends React.Component {
 
 
 const app = document.getElementById('app');
-ReactDOM.render(<MagicMirror></MagicMirror>, app);
+const magicmirror = <MagicMirror />;
+
+ReactDOM.render(magicmirror, app);
