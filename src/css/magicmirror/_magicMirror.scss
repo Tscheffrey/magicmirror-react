@@ -1,9 +1,6 @@
 /* Fonts importieren */
 @import 'fonts';
 
-
-
-
 @mixin setBaseFont(){
 	font-family: 'Montserrat', sans-serif;
 }
@@ -92,5 +89,17 @@ body{
 			}
 		}
 	}
+
+	.--mm-widgetArea {
+		height: 100vh;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top:0;
+		left: 0;
+		pointer-events: none;
+	}
+
 	@import 'widgetBase';
 }

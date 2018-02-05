@@ -96,16 +96,16 @@ class MagicMirror extends React.Component {
     this.addWidget({
     type:BaseWidget,
     props:{
-      text: 'First Widget'
+      widgetName: 'First Widget'
       }
     });
 
-    this.addWidget({
-    type:BaseWidget,
-    props:{
-      text: 'Second Widget'
-      }
-    });
+    // this.addWidget({
+    // type:BaseWidget,
+    // props:{
+    //   widgetName: 'Second Widget'
+    //   }
+    // });
   }
 
   addWidget(widget){
@@ -139,6 +139,7 @@ class MagicMirror extends React.Component {
       let widget = this.state.widgets[i];
       let props = widget.props;
       props.key = i;
+      props.canvasInEditMode = this.state.editMode;
       var element = React.createElement(widget.type,props,null);
       renderedWidgets.push(element);
     }
@@ -154,7 +155,7 @@ class MagicMirror extends React.Component {
     return (
       <section className={mainContainerClasses.join(' ')}>
           <button onClick={this.toggleEditMode} className='--mm-editButton'></button>
-          {this.renderWidgets()}
+            {this.renderWidgets()}
       </section>
     )
   }
@@ -164,12 +165,61 @@ class MagicMirror extends React.Component {
 class BaseWidget extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      settingsViewOpen:false,
+      cssWidgetPrefix:"baseWidget",
+      widgetName:"Standard Widget",
+      placement:{
+        height: 20,
+        width:30
+      }
+    }
+    if(props.widgetName) this.state.widgetName = props.widgetName;
+
+    this.toggleSettings = this.toggleSettings.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.canvasInEditMode) this.setState({settingsViewOpen:false});
+  }
+
+
+  convertIntToRem(number){
+    return number.toString() + 'rem';
+  }
+
+  toggleSettings(){
+    this.setState({settingsViewOpen: !this.settingsViewOpen});
   }
 
   render(){
+    let mainContainerClasses = ['--mm-widget'];
+    if(this.state.cssWidgetPrefix) mainContainerClasses.push('--mm-' + this.state.cssWidgetPrefix);
+    if(this.state.settingsViewOpen) mainContainerClasses.push('--mm-widget-flipped');
+
+    let mainContainerStyle = {
+      height: this.convertIntToRem(this.state.placement.height),
+      width: this.convertIntToRem(this.state.placement.width)
+    }
+
+    if(this.state.editMode) mainContainerClasses.push('--mm-editMode');
+
     return (
-      <p>{this.props.text}</p>
+      <div className={mainContainerClasses.join(' ')} style={mainContainerStyle} >
+        <div className="--mm-widget-front">
+        </div>
+
+        <div className="--mm-widget-back">
+        </div>
+
+        <div className="--mm-widget-nameTag">
+          {this.state.widgetName}
+        </div>
+
+        <button onClick={this.toggleSettings} className='--mm-widget-settingsButton --mm-visible'></button>
+
+
+      </div>
     )
   }
 
