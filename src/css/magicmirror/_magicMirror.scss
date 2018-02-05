@@ -73,7 +73,8 @@ body{
 		.--mm-widget{
 			cursor: move;
 			/* box-shadow: 0 0 5rem 1rem rgba(black, 0.4); */
-			&:hover, &.ui-resizable-resizing{
+			&:hover,
+			&.--mm-widget-isBeingDragged{
 				outline-color: rgba(white,1);
 				&:not(.mm-widget-flipped) .--mm-widget-settingsButton.--mm-visible{
 					opacity: 1;

@@ -1137,6 +1137,110 @@
 		"oAP": "\/build\/js\/bower_components\/fetch\/LICENSE",
 		"oF": 1
 		},
+	"\/src\/js\/bower_components\/interactjs\/.bower.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/.bower.json",
+		"oF": 1,
+		"oO": 0,
+		"oS": 1
+		},
+	"\/src\/js\/bower_components\/interactjs\/bower.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/bower.json",
+		"oF": 1,
+		"oO": 0,
+		"oS": 1
+		},
+	"\/src\/js\/bower_components\/interactjs\/CHANGELOG.md": {
+		"cB": 0,
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/CHANGELOG.md",
+		"oF": 1,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
+		},
+	"\/src\/js\/bower_components\/interactjs\/dist\/interact.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 2,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/dist\/interact.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/src\/js\/bower_components\/interactjs\/dist\/interact.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/dist\/interact.min.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/src\/js\/bower_components\/interactjs\/dist\/interact.min.js.map": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/dist\/interact.min.js.map",
+		"oF": 1
+		},
+	"\/src\/js\/bower_components\/interactjs\/interact.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/interact.js",
+		"oF": 1,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/src\/js\/bower_components\/interactjs\/LICENSE": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/LICENSE",
+		"oF": 1
+		},
+	"\/src\/js\/bower_components\/interactjs\/package.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/package.json",
+		"oF": 1,
+		"oO": 0,
+		"oS": 1
+		},
+	"\/src\/js\/bower_components\/interactjs\/README.md": {
+		"cB": 0,
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"oA": 1,
+		"oAP": "\/build\/js\/bower_components\/interactjs\/README.md",
+		"oF": 1,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
+		},
 	"\/src\/js\/bower_components\/react\/.bower.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -1358,7 +1462,7 @@
 	"displayValue": "magicmirror-react",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-punDog",
-	"lastBuiltDate": 539509764
+	"lastBuiltDate": 539533678
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

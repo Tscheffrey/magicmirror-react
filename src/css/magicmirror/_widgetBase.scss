@@ -1,10 +1,13 @@
+
+
 .--mm-widget{
 	position: absolute;
 	outline: 0.2rem solid rgba(black,0);
 	/* background-color: rgba(white, 0.1); */
 	box-sizing: border-box;
 	transform: scale(1);
-	transition: transform 100ms ease, outline 200ms ease, box-shadow 500ms ease 100ms;
+	//transition: transform 100ms ease, outline 200ms ease, box-shadow 500ms ease 100ms;
+	transition: outline 200ms ease;
 	perspective: 50rem;
 	/* box-shadow: 0 0 5rem 1rem rgba(black, 0); */
 	> .--mm-widget-front,
@@ -94,6 +97,9 @@
 			transform: translateX(-50%);
 			background-color: rgba(black,0);
 		}
+	}
+	&.--mm-widget-isBeingDragged{
+		z-index: 100;
 	}
 	@import 'clockWidget';
 }

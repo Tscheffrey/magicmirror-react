@@ -57,7 +57,6 @@ class WeatherWidget extends React.Component {
       weatherConditions = <p>{this.state.lastResponse.weather[0].description}</p>;
     }
 
-
     return (
       <section>
         <form onSubmit={this.onSubmitForm}>
@@ -100,12 +99,12 @@ class MagicMirror extends React.Component {
       }
     });
 
-    // this.addWidget({
-    // type:BaseWidget,
-    // props:{
-    //   widgetName: 'Second Widget'
-    //   }
-    // });
+    this.addWidget({
+    type:BaseWidget,
+    props:{
+      widgetName: 'Second Widget'
+      }
+    });
   }
 
   addWidget(widget){
@@ -171,7 +170,10 @@ class BaseWidget extends React.Component {
       widgetName:"Standard Widget",
       placement:{
         height: 20,
-        width:30
+        width:30,
+        offsetX:0,
+        offsetY:0,
+        isBeingDragged:false
       }
     }
     if(props.widgetName) this.state.widgetName = props.widgetName;
@@ -189,24 +191,80 @@ class BaseWidget extends React.Component {
   }
 
   toggleSettings(){
-    this.setState({settingsViewOpen: !this.settingsViewOpen});
+    this.setState({settingsViewOpen: !this.state.settingsViewOpen});
+  }
+
+  componentDidMount(){
+    if(this.props.canvasInEditMode) this.initDraggable();
+    else this.removeDraggable;
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.props.canvasInEditMode !== prevProps.canvasInEditMode){
+      if(this.props.canvasInEditMode) this.initDraggable();
+      else this.removeDraggable();
+    }
+  }
+
+  initDraggable(){
+    let draggableElement = this.domRef;
+
+    this.interObj = interact(draggableElement).draggable({
+      //allowFrom: '.drag-handle',
+      restrict: {
+          restriction: "parent",
+          endOnly: true,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+      },
+      inertia: true,
+      onstart: this.onDragStart.bind(this),
+      onend:this.onDragEnd.bind(this),
+      onmove:this.onDrag.bind(this)
+      }
+    );
+  }
+
+  removeDraggable(){
+    this.interObj.draggable(false);
+  }
+
+
+  onDrag(e){
+    let placement = this.state.placement;
+    if(e.dx !== 0) placement.offsetX += e.dx;
+    if(e.dy !== 0) placement.offsetY += e.dy;
+    this.setState({placement});
+  }
+
+  onDragStart(){
+    this.setState({isBeingDragged:true});
+  }
+
+  onDragEnd(){
+    this.setState({isBeingDragged:false});
   }
 
   render(){
     let mainContainerClasses = ['--mm-widget'];
     if(this.state.cssWidgetPrefix) mainContainerClasses.push('--mm-' + this.state.cssWidgetPrefix);
     if(this.state.settingsViewOpen) mainContainerClasses.push('--mm-widget-flipped');
+    if(this.state.isBeingDragged) mainContainerClasses.push('--mm-widget-isBeingDragged');
 
     let mainContainerStyle = {
       height: this.convertIntToRem(this.state.placement.height),
-      width: this.convertIntToRem(this.state.placement.width)
+      width: this.convertIntToRem(this.state.placement.width),
+      transform: 'translate(' + this.state.placement.offsetX  + 'px,' + this.state.placement.offsetY + 'px)'
     }
 
     if(this.state.editMode) mainContainerClasses.push('--mm-editMode');
 
     return (
-      <div className={mainContainerClasses.join(' ')} style={mainContainerStyle} >
+      <div
+        className={mainContainerClasses.join(' ')}
+        style={mainContainerStyle}
+        ref={(ref) => { this.domRef = ref; }} >
         <div className="--mm-widget-front">
+          <p>content</p>
         </div>
 
         <div className="--mm-widget-back">
