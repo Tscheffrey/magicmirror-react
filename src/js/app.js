@@ -95,14 +95,14 @@ class MagicMirror extends React.Component {
     this.addWidget({
     type:BaseWidget,
     props:{
-      widgetName: 'First Widget'
+      widgetName: 'Widget 1'
       }
     });
 
     this.addWidget({
     type:BaseWidget,
     props:{
-      widgetName: 'Second Widget'
+      widgetName: 'Widget 2'
       }
     });
   }
